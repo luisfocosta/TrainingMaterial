@@ -1,0 +1,25 @@
+MAIL FROM:<request@healthcare_r_us.com>
+RCPT TO:demento@whatsit.com
+DATA
+We hereby request the following patient data, 
+with credentials and authorizations as shown below.
+
+Lab tests were ordered by this office on 10/10/2005
+If you have any questions, please contact our office.
+
+Thank you,
+Dr. Demento
+
+Subject ID: Will Provost
+Credentials: quicksand
+Information requested: Lab test results
+Test codes:
+    7033
+    0085X
+    21-889
+
+BEGIN_SIGNATURE
+302c2143c80b357162774c5f8fdac12cfecc3cb9a64a3162145873edb32c90ee9ef746b4b3291126e3abc62f94
+END_SIGNATURE
+
+.

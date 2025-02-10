@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.parallel.ChewThroughNumbers $1 $2 $3

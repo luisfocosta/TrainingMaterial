@@ -1,0 +1,4 @@
+#!/bin/csh -f
+mkdir build
+rm -r build/*
+javac -d build  src/cc/cars/*.java src/cc/cars/sales/*.java src/cc/tools/*.java

@@ -1,0 +1,23 @@
+Results over a well-mixed set of 2500 items (2 nested loops, as written):
+
+Bubble sort:
+Done in 1502 milliseconds.
+
+Insertion sort:
+Done in 90 milliseconds.
+
+Merge sort:
+Done in 10 milliseconds.
+
+
+Results over a well-mixed set of 125,000 items (3 nested loops):
+
+Bubble sort:
+Done in 7338723 milliseconds.
+
+Insertion sort:
+Done in 1372864 milliseconds.
+
+Merge sort:
+Done in 611 milliseconds.
+

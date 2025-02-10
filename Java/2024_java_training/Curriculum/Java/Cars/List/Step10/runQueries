@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.cars.Queries $1 $2 $3

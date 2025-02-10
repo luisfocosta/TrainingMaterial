@@ -1,0 +1,4 @@
+#!/bin/csh -f
+mkdir build
+rm build/*
+javac -d build src/cc/datetime/*.java src/cc/tools/*.java

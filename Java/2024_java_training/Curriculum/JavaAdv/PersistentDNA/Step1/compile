@@ -1,0 +1,4 @@
+#!/bin/csh -f
+mkdir build
+rm -r build/*
+javac -d build src/*.java

@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.files.Analysis $1

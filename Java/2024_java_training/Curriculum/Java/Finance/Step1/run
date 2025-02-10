@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build Asset $1 $2 $3

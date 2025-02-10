@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.rental.Rental $1 $2 $3 $4

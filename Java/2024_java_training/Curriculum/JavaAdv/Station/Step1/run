@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.monitor.TestStation $1 $2 $3 $4 $5 $6

@@ -1,0 +1,4 @@
+#!/bin/csh -f
+mkdir build
+rm -r build/*
+javac -d build src/cc/hvac/*.java src/cc/monitor/*.java  src/cc/security/*.java  src/cc/transport/*.java

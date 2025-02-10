@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.math.EllipsoidCLI $1 $2 $3

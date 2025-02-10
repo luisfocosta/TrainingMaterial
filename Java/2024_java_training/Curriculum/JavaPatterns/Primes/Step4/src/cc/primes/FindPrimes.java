@@ -1,0 +1,119 @@
+/*
+Copyright 2005 Will Provost.
+All rights reserved by Capstone Courseware, LLC.
+*/
+
+package cc.primes;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
+
+/**
+An engine for finding prime numbers.
+
+@author Will Provost
+*/
+public class FindPrimes
+{
+    private long howHigh;
+    private List<Long> primes;
+    private AtomicBoolean canceled = new AtomicBoolean (false);
+
+    private List<Consumer<Long>> listeners = new LinkedList<> ();
+
+    /**
+    Create with a "how high" value -- the engine will create a list of all
+    prime numbers from one to this number, inclusive.
+    */
+    @SuppressWarnings("unused") // we like our loop labels
+    public FindPrimes (long howHigh)
+    {
+        this.howHigh = howHigh;
+    }
+    
+    /**
+    Trigger the algorithm to find primes.
+    This will iterate from 2 to {@link #getHowHigh "how high"} and add any 
+    primes to the {@link #getPrimes primes list}.  It observes a 
+    {@link #cancel canceled} flag for graceful shutdown.
+    */
+    public void find ()
+    {
+        primes = new ArrayList<Long> ();
+        canceled.set (false);
+        Candidate: for (long candidate = 2; candidate <= howHigh; ++candidate)
+        {
+            if (canceled.get ())
+                return;
+            
+            Factor: for (long factor = 2; factor <= candidate / 2; ++factor)
+                if (candidate % factor == 0)
+                    continue Candidate;
+
+            primes.add (candidate);
+            firePrimesEvent (candidate);
+        }
+    }
+    
+    /**
+    Cancel the current {@link #find find} process.
+    */
+    public void cancel ()
+    {
+        canceled.set (true);
+    }
+    
+    /**
+    Accessor for the "how high" value -- the maximum integer to be tested by
+    the {@link #find find} method.
+    */
+    public long getHowHigh ()
+    {
+        return howHigh;
+    }
+    
+    /**
+    Accessor for the list of found primes, available after or during compilation.
+    */
+    public List<Long> getPrimes ()
+    {
+        synchronized (primes)
+        {
+            return primes;
+        }
+    }
+    /**
+    Registers an observer of primes events.
+    */
+    public synchronized void addPrimesListener (Consumer<Long> listener)
+    {
+        listeners.add (listener);
+    }
+    
+    /**
+    Un-registers an observer of primes events.
+    */
+    public synchronized void removePrimesListener (Consumer<Long> listener)
+    {
+        listeners.remove (listener);
+    }
+    
+    /**
+    Helper method to fire a primes event to all registered listeners.
+    */
+    protected void firePrimesEvent (long prime)
+    {
+        List<Consumer<Long>> recipients = null;
+        synchronized (this)
+        {
+            recipients = new ArrayList<Consumer<Long>> (listeners);
+        }
+        
+        for (Consumer<Long> recipient : recipients)
+            recipient.accept (prime);
+    }
+}
+

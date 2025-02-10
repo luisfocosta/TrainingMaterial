@@ -1,0 +1,57 @@
+** RENAME THIS FILE TO StressTest.java ONCE EVENT AND LISTENER TYPES ARE AVAILABLE **
+
+/*
+Copyright 2005, 2015 Will Provost.
+All rights reserved by Capstone Courseware, LLC.
+*/
+
+package cc.primes;
+
+import java.util.function.Consumer;
+
+/**
+Stress tester for the {@link FindPrimes} component that rapidly and repeatedly
+adds and removes itself as a listener for primes events.
+
+@author Will Provost
+*/
+public class StressTest
+    extends Thread
+    implements Consumer<Long>
+{
+    private FindPrimes target;
+
+    /**
+    Create with reference to a primes-finding engine.
+    Sets itself as a daemon thread (so that it's easier to work with, no need
+    to explicitly stop it to let the application close down), and stores the
+    reference to the engine as a target for add/remove calls.
+    */
+    public StressTest (FindPrimes target)
+    {
+        this.target = target;
+        setDaemon (true);
+    }
+
+    /**
+    {@link FindPrimes#addPrimesListener Adds itself as a primes listener},
+    {@link FindPrimes#removePrimesListener removes itself as a primes listener},
+    and repeats ad infinitum.
+    */
+    public void run ()
+    {
+        while (true)
+        {
+            target.addPrimesListener (this);
+            target.removePrimesListener (this);
+        }
+    }
+
+    /**
+    No-op implementation of the listener method.  We have no need to do
+    anything with the events we receive; we just want to stress the event source
+    with regard to its management of listeners.
+    */
+    public void accept (Long prime) {}
+}
+

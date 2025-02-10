@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build -Djava.util.logging.config.file=Cars.logging.properties cc.cars.Application $1 $2 $3

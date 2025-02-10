@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.reflection.TestUITree $1

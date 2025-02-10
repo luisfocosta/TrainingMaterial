@@ -1,0 +1,7 @@
+#!/bin/csh -f
+mkdir build
+rm build/*
+javac -d build src/cc/language/*.java
+cd build
+jar cf ../MyApps.jar cc/language/*.class
+cd  ..

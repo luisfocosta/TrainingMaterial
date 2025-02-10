@@ -1,0 +1,2 @@
+#!/bin/csh -f
+java -classpath build cc.cars.Buyer $1 $2 $3 $4 $5

@@ -1,0 +1,4 @@
+#!/bin/csh -f
+mkdir build
+rm -r build/*
+javac -d build -classpath lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar src/cc/sockets/*.java test/cc/sockets/*.java
